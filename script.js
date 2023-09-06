@@ -28,6 +28,8 @@ allbtns.forEach((btn) => {
 const display = (str) => {
   displaElm.innerText = str || "0.00";
 };
-const total =(ttl)=>{
-    return eval(strToDisplay)
+const total =()=>{
+    const ttl= eval(strToDisplay);
+  display(ttl);
+  
 }
