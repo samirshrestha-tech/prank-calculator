@@ -2,7 +2,7 @@ const allbtns = [...document.getElementsByClassName("btn")];
 // console.log(allbtns);
 let strToDisplay = "";
 const displaElm = document.querySelector(".display");
-const 
+const operators = ["*", "/", "+", "-", "%"];
 
 allbtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -17,8 +17,12 @@ allbtns.forEach((btn) => {
       const str = strToDisplay.slice(0, -1);
       return display(strToDisplay);
     }
-    if (val=== "="){
-        return total();
+    if (val === "=") {
+      const lastChar = strToDisplay[strToDisplay.length - 1];
+      if (operators.includes(lastChar)) {
+        strToDisplay = strToDisplay.slice(0, -1);
+      }
+      return total();
     }
     strToDisplay += val;
     display(strToDisplay);
@@ -28,8 +32,7 @@ allbtns.forEach((btn) => {
 const display = (str) => {
   displaElm.innerText = str || "0.00";
 };
-const total =()=>{
-    const ttl= eval(strToDisplay);
+const total = () => {
+  const ttl = eval(strToDisplay);
   display(ttl);
-  
-}
+};
