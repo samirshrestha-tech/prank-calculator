@@ -3,6 +3,14 @@ const allbtns = [...document.getElementsByClassName("btn")];
 let strToDisplay = "";
 const displaElm = document.querySelector(".display");
 const operators = ["*", "/", "+", "-", "%"];
+const decimal = document.querySelector(".btn-dot");
+decimal.addEventListener("click", () => {
+  if (decimal.innerText.includes(".") || val.includes(".")) {
+    decimal.disabled = true;
+  } else {
+    decimal.disabled = false;
+  }
+});
 
 allbtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -14,7 +22,8 @@ allbtns.forEach((btn) => {
       display(strToDisplay);
     }
     if (val === "C") {
-      const str = strToDisplay.slice(0, -1);
+      strToDisplay = strToDisplay.slice(0, -1);
+
       return display(strToDisplay);
     }
     if (val === "=") {
@@ -35,4 +44,5 @@ const display = (str) => {
 const total = () => {
   const ttl = eval(strToDisplay);
   display(ttl);
+  strToDisplay = ttl.toString();
 };
