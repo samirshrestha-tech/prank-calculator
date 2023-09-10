@@ -2,15 +2,19 @@ const allbtns = [...document.getElementsByClassName("btn")];
 // console.log(allbtns);
 let strToDisplay = "";
 const displaElm = document.querySelector(".display");
+// console.log(displaElm);
 const operators = ["*", "/", "+", "-", "%"];
 const decimal = document.querySelector(".btn-dot");
-decimal.addEventListener("click", () => {
-  if (decimal.innerText.includes(".") || val.includes(".")) {
-    decimal.disabled = true;
-  } else {
-    decimal.disabled = false;
-  }
-});
+// decimal.addEventListener("click", () => {
+//   const dec = decimal.innerText;
+//   if (dec.includes(".") || btn.innerText.includes(".")) {
+//     dec.disabled = true;
+//   } else {
+//     dec.disabled = false;
+//   }
+// });
+// console.log(decimal);
+let decimalCount = 0;
 
 allbtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -33,6 +37,17 @@ allbtns.forEach((btn) => {
       }
       return total();
     }
+    if (val === ".") {
+      decimalCount++;
+    }
+
+    if (val === "." && decimalCount > 1) {
+      const lastChar = strToDisplay[strToDisplay.length - 1];
+      if (operators.includes(lastChar) && decimalCount === 1) {
+        decimalCount++;
+      }
+      return;
+    }
     strToDisplay += val;
     display(strToDisplay);
   });
@@ -44,5 +59,5 @@ const display = (str) => {
 const total = () => {
   const ttl = eval(strToDisplay);
   display(ttl);
-  strToDisplay = ttl.toString();
+  // strToDisplay = ttl.toString();
 };
